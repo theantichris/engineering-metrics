@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-const pullRequestAPI string = "https://api.github.com/repo/%s/%s/pulls?state=closed&per_page=100&page=%d"
+const pullRequestAPI string = "https://api.github.com/repos/%s/%s/pulls?state=closed&per_page=100&page=%d"
 
 // PullRequests holds information on a GitHub pull request.
 type PullRequest struct {
@@ -39,8 +39,11 @@ func fetchMergedPRs(owner, repo, token string, page int) ([]PullRequest, error) 
 
 	var mergedPRs []PullRequest
 	for _, pr := range allPRs {
-		// TODO: input dates
-		if !pr.MergedAt.IsZero() && pr.MergedAt.After(time.Date(2025, 4, 1, 0, 0, 0, 0, time.UTC)) && pr.MergedAt.Before(time.Date(2025, 6, 30, 23, 59, 59, 0, time.UTC)) {
+		// TODO: input dates, can probably put this on the API request for fewer results and pagination
+		rangeStart := time.Date(2025, 4, 1, 0, 0, 0, 0, time.UTC)
+		rangeEnd := time.Date(2025, 6, 30, 23, 59, 59, 0, time.UTC)
+
+		if !pr.MergedAt.IsZero() && pr.MergedAt.After(rangeStart) && pr.MergedAt.Before(rangeEnd) {
 			mergedPRs = append(mergedPRs, pr)
 		}
 	}
@@ -63,8 +66,8 @@ func getWeekdaysBetween(start, end time.Time) int {
 
 func main() {
 	// TODO: get this from CLI input.
-	owner := "your-org"
-	repo := "your repo"
+	owner := "CompanyCam"
+	repo := "Company-Cam-API"
 	token := os.Getenv("GITHUB_TOKEN")
 	page := 1
 	totalDays := 0
