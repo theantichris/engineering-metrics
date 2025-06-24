@@ -7,6 +7,7 @@
 *.dll
 *.so
 *.dylib
+engineering-metrics
 
 # Test binary, built with `go test -c`
 *.test
