@@ -62,6 +62,7 @@ func getWeekdaysBetween(start, end time.Time) int {
 }
 
 func main() {
+	// TODO: get this from CLI input.
 	owner := "your-org"
 	repo := "your repo"
 	token := os.Getenv("GITHUB_TOKEN")
