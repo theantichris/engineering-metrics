@@ -67,7 +67,7 @@ func getWeekdaysBetween(start, end time.Time) int {
 func main() {
 	// TODO: get this from CLI input.
 	owner := "CompanyCam"
-	repo := "Company-Cam-API"
+	repo := "companycam-mobile"
 	token := os.Getenv("GITHUB_TOKEN")
 	page := 1
 	totalDays := 0
