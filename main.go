@@ -39,7 +39,7 @@ func fetchMergedPRs(owner, repo, token string, page int) ([]PullRequest, error) 
 
 	var mergedPRs []PullRequest
 	for _, pr := range allPRs {
-		// TODO: input dates, can probably put this on the API request for fewer results and pagination
+		// TODO: Get dates from CLI.
 		rangeStart := time.Date(2025, 4, 1, 0, 0, 0, 0, time.UTC)
 		rangeEnd := time.Date(2025, 6, 30, 23, 59, 59, 0, time.UTC)
 
